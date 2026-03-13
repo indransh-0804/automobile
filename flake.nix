@@ -38,7 +38,7 @@
               {pkgs, ...}: {
                 android = {
                   enable = true;
-                  platforms.version = ["35" "36"];
+                  platforms.version = ["34" "36"];
                   abis = ["arm64-v8a" "x86_64"];
                   cmake.version = ["3.22.1"];
                   cmdLineTools.version = "16.0";

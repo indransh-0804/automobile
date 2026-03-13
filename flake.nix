@@ -38,12 +38,12 @@
               {pkgs, ...}: {
                 android = {
                   enable = true;
-                  platforms.version = ["34" "36"];
+                  platforms.version = ["34" "35" "36"];
                   abis = ["arm64-v8a" "x86_64"];
                   cmake.version = ["3.22.1"];
                   cmdLineTools.version = "16.0";
                   tools.version = "26.1.1";
-                  buildTools.version = ["35.0.0"];
+                  buildTools.version = ["34.0.0" "35.0.0"];
                   sources.enable = true;
                   systemImages.enable = false;
                   ndk.enable = true;

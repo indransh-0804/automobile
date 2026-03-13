@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -51,19 +52,11 @@ class _LoanFormScreenState extends ConsumerState<LoanFormScreen> {
     if (principal != null && interestRate != null && termMonths != null && termMonths > 0) {
       final monthlyRate = interestRate / 100 / 12;
       final payment = monthlyRate > 0
-          ? (principal * monthlyRate * _pow(1 + monthlyRate, termMonths)) /
-              (_pow(1 + monthlyRate, termMonths) - 1)
+          ? (principal * monthlyRate * math.pow(1 + monthlyRate, termMonths)) /
+              (math.pow(1 + monthlyRate, termMonths) - 1)
           : principal / termMonths;
       _monthlyPaymentController.text = payment.toStringAsFixed(2);
     }
-  }
-
-  double _pow(double base, int exponent) {
-    double result = 1;
-    for (int i = 0; i < exponent; i++) {
-      result *= base;
-    }
-    return result;
   }
 
   Future<void> _submit() async {

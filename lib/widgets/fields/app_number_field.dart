@@ -27,8 +27,26 @@ class AppNumberField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (controller == null) {
+      return TextFormField(
+        validator: validator,
+        onChanged: onChanged,
+        enabled: enabled,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+        ],
+        textInputAction: textInputAction,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          helperText: helperText,
+          prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+        ),
+      );
+    }
     return ValueListenableBuilder<TextEditingValue>(
-      valueListenable: controller ?? TextEditingController(),
+      valueListenable: controller!,
       builder: (context, value, _) {
         return TextFormField(
           controller: controller,

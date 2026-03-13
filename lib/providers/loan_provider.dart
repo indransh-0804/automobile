@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:automobile/core/services/firestore_service.dart';
 import 'package:automobile/models/loan_model.dart';
+import 'package:automobile/providers/repository_providers.dart';
 
 final loansProvider = StreamProvider<List<LoanModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.loansStream();
+  final repository = ref.watch(loanRepositoryProvider);
+  return repository.loansStream();
 });
 
 final loanControllerProvider = Provider<LoanController>((ref) {
@@ -17,12 +17,12 @@ class LoanController {
   LoanController(this._ref);
 
   Future<void> addLoan(LoanModel loan) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.addLoan(loan);
+    final repository = _ref.read(loanRepositoryProvider);
+    await repository.addLoan(loan);
   }
 
   Future<void> updateLoanStatus(String id, LoanStatus status) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.updateLoanStatus(id, status);
+    final repository = _ref.read(loanRepositoryProvider);
+    await repository.updateLoanStatus(id, status);
   }
 }

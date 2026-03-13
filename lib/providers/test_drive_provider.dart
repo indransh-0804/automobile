@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:automobile/core/services/firestore_service.dart';
 import 'package:automobile/models/test_drive_model.dart';
+import 'package:automobile/providers/repository_providers.dart';
 
 final testDrivesProvider = StreamProvider<List<TestDriveModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.testDrivesStream();
+  final repository = ref.watch(testDriveRepositoryProvider);
+  return repository.testDrivesStream();
 });
 
 final testDriveControllerProvider = Provider<TestDriveController>((ref) {
@@ -17,12 +17,12 @@ class TestDriveController {
   TestDriveController(this._ref);
 
   Future<void> addTestDrive(TestDriveModel testDrive) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.addTestDrive(testDrive);
+    final repository = _ref.read(testDriveRepositoryProvider);
+    await repository.addTestDrive(testDrive);
   }
 
   Future<void> updateStatus(String id, TestDriveStatus status) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.updateTestDriveStatus(id, status);
+    final repository = _ref.read(testDriveRepositoryProvider);
+    await repository.updateTestDriveStatus(id, status);
   }
 }

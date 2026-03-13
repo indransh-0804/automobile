@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:automobile/core/services/firestore_service.dart';
 import 'package:automobile/models/purchase_model.dart';
+import 'package:automobile/providers/repository_providers.dart';
 
 final purchasesProvider = StreamProvider<List<PurchaseModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.purchasesStream();
+  final repository = ref.watch(purchaseRepositoryProvider);
+  return repository.purchasesStream();
 });
 
 final purchaseControllerProvider = Provider<PurchaseController>((ref) {
@@ -17,7 +17,7 @@ class PurchaseController {
   PurchaseController(this._ref);
 
   Future<void> addPurchase(PurchaseModel purchase) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.addPurchase(purchase);
+    final repository = _ref.read(purchaseRepositoryProvider);
+    await repository.addPurchase(purchase);
   }
 }

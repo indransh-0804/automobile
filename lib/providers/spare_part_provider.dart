@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:automobile/core/services/firestore_service.dart';
 import 'package:automobile/models/spare_part_model.dart';
+import 'package:automobile/providers/repository_providers.dart';
 
 final sparePartsProvider = StreamProvider<List<SparePartModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.sparePartsStream();
+  final repository = ref.watch(sparePartRepositoryProvider);
+  return repository.sparePartsStream();
 });
 
 final lowStockPartsProvider = StreamProvider<List<SparePartModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.lowStockPartsStream();
+  final repository = ref.watch(sparePartRepositoryProvider);
+  return repository.lowStockPartsStream();
 });
 
 final sparePartControllerProvider = Provider<SparePartController>((ref) {
@@ -22,17 +22,17 @@ class SparePartController {
   SparePartController(this._ref);
 
   Future<void> addSparePart(SparePartModel part) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.addSparePart(part);
+    final repository = _ref.read(sparePartRepositoryProvider);
+    await repository.addSparePart(part);
   }
 
   Future<void> updateSparePart(SparePartModel part) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.updateSparePart(part);
+    final repository = _ref.read(sparePartRepositoryProvider);
+    await repository.updateSparePart(part);
   }
 
   Future<void> deleteSparePart(String id) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.deleteSparePart(id);
+    final repository = _ref.read(sparePartRepositoryProvider);
+    await repository.deleteSparePart(id);
   }
 }

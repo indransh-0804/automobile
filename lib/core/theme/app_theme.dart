@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:automobile/core/theme/color_scheme.dart';
+import 'package:automobile/core/constants/app_constants.dart';
 
 ThemeData appTheme() {
   final colorScheme = appColorScheme();
   return ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
     colorScheme: colorScheme,
     scaffoldBackgroundColor: colorScheme.surface,
     appBarTheme: AppBarTheme(
@@ -17,7 +17,7 @@ ThemeData appTheme() {
       color: colorScheme.surfaceContainerHighest,
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(kBaseUnit * 1.5),
       ),
     ),
     snackBarTheme: SnackBarThemeData(

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:automobile/core/services/firestore_service.dart';
 import 'package:automobile/models/car_model.dart';
+import 'package:automobile/providers/repository_providers.dart';
 
 final carsProvider = StreamProvider<List<CarModel>>((ref) {
-  final firestoreService = ref.watch(firestoreServiceProvider);
-  return firestoreService.carsStream();
+  final repository = ref.watch(carRepositoryProvider);
+  return repository.carsStream();
 });
 
 final carControllerProvider = Provider<CarController>((ref) {
@@ -17,17 +17,17 @@ class CarController {
   CarController(this._ref);
 
   Future<void> addCar(CarModel car) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.addCar(car);
+    final repository = _ref.read(carRepositoryProvider);
+    await repository.addCar(car);
   }
 
   Future<void> updateCar(CarModel car) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.updateCar(car);
+    final repository = _ref.read(carRepositoryProvider);
+    await repository.updateCar(car);
   }
 
   Future<void> deleteCar(String id) async {
-    final service = _ref.read(firestoreServiceProvider);
-    await service.deleteCar(id);
+    final repository = _ref.read(carRepositoryProvider);
+    await repository.deleteCar(id);
   }
 }

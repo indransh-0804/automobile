@@ -1,17 +1,19 @@
+// lib/app.dart
 import 'package:flutter/material.dart';
-import 'package:automobile/core/theme/app_theme.dart';
-import 'package:automobile/core/router/app_router.dart';
 
-class AutoMobileApp extends StatelessWidget {
-  const AutoMobileApp({super.key});
+import 'core/theme/app_theme.dart';
+import 'router/app_router.dart';
+
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'AutoMobile',
       debugShowCheckedModeBanner: false,
-      theme: appTheme(),
-      routerConfig: appRouter,
+      theme: AppTheme.dark(),
+      routerConfig: AppRouter.router,
     );
   }
 }
